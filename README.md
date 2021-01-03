@@ -1,4 +1,4 @@
-### Deploy on https://ivankozhyn.github.io/infotech-mortal-kombat/index.html
+### Deploy on https://ivankozhyn.github.io/infotech-mortal-kombat
 
 # Task
 
@@ -48,11 +48,15 @@ MortalCombat mc_choose_hero: при загрузке страницы, пока�
   экранов(сетка выбора персонажа меняет структуру на разном размере экрана)
 - при старте битвы показывается надпись 'FIGHT' до момента нажатия на любую
   QWERTY кнопку
+  ![FIGHT](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fight.gif)
 - если нажать кнопки QWERTY от 3 до 5 раз(работает рандом) появляется надпись
   'FINISH HIM'
+  ![FINISHHIM](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/finishHim.gif)
 - если нажать кнопки QWERTY от 6 до 8 раз(работает рандом) и более появляется
   вопрос 'FATALITY ?'
+  ![Fatality](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fatality.gif)
 - если иконки QWERTY содержат 3 одинаковые, то появляется надпись 'SUPER'
+  ![Super](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/super.gif)
 - при загрузке страницы с выбором персонажа, начальный персонаж выбирается
   рандомно
 - QWERTY клавиши работают только в English раскладке, есть поддержка и
