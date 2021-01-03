@@ -56,7 +56,7 @@ MortalCombat mc_choose_hero: при загрузке страницы, пока�
   вопрос 'FATALITY ?'
   ![Fatality](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fatality.gif)
 - если иконки QWERTY содержат 3 одинаковые, то появляется надпись 'SUPER'
-  ![Super](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/super.gif)
+  ![Super](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/superFight.gif)
 - при загрузке страницы с выбором персонажа, начальный персонаж выбирается
   рандомно
 - QWERTY клавиши работают только в English раскладке, есть поддержка и
