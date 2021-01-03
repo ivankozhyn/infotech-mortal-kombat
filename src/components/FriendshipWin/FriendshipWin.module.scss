@@ -1,0 +1,59 @@
+.container {
+  position: relative;
+  min-height: 100vh;
+  min-width: 100vw;
+  background-image: url(../../assets/bg.png);
+  background-position: top;
+  background-color: #000000;
+  background-size: cover;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.friendship {
+  width: 600px;
+}
+
+.win {
+  width: 200px;
+  margin-bottom: 50px;
+}
+
+.button {
+  padding: 15px 30px;
+  background-color: #fda90f;
+  border: 1px solid #fda90f;
+  outline: none;
+  text-transform: uppercase;
+  border-radius: 5px;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  z-index: 2;
+  &:hover {
+    box-shadow: 0 0 30px rgba(253, 169, 15, 0.5);
+    transform: scale(1.1);
+  }
+}
+
+.particles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+@media screen and (max-width: 800px) {
+  .friendship {
+    width: 350px;
+  }
+
+  .win {
+    width: 100px;
+  }
+}

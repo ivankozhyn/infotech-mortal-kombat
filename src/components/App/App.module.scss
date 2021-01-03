@@ -1,0 +1,15 @@
+.smallScreen {
+  display: none;
+}
+
+@media screen and (max-width: 407px) {
+  .app {
+    display: none;
+  }
+  .smallScreen {
+    padding: 10px;
+    display: block;
+    font-size: 20px;
+    color: #ff0000;
+  }
+}
