@@ -43,8 +43,8 @@ export default function ChooseHero() {
   }, [])
 
   useEffect(() => {
-    setMyHeroName(() => getActiveHeroName(startActiveHeroIndex(), allHeroNames))
-  }, [allHeroNames])
+    setMyHeroName(() => getActiveHeroName(activeCardIndex, allHeroNames))
+  }, [allHeroNames, activeCardIndex])
 
   const countHeroesInColumn = useCallback(() => {
     if (countHeroesInRow) {
