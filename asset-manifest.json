@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/infotech-mortal-kombat/static/css/main.1fc9825d.chunk.css",
+    "main.css": "/infotech-mortal-kombat/static/css/main.bced4938.chunk.css",
     "main.js": "/infotech-mortal-kombat/static/js/main.eb1fec70.chunk.js",
     "main.js.map": "/infotech-mortal-kombat/static/js/main.eb1fec70.chunk.js.map",
     "runtime-main.js": "/infotech-mortal-kombat/static/js/runtime-main.c05ef120.js",
@@ -8,7 +8,7 @@
     "static/js/2.021baa46.chunk.js": "/infotech-mortal-kombat/static/js/2.021baa46.chunk.js",
     "static/js/2.021baa46.chunk.js.map": "/infotech-mortal-kombat/static/js/2.021baa46.chunk.js.map",
     "index.html": "/infotech-mortal-kombat/index.html",
-    "static/css/main.1fc9825d.chunk.css.map": "/infotech-mortal-kombat/static/css/main.1fc9825d.chunk.css.map",
+    "static/css/main.bced4938.chunk.css.map": "/infotech-mortal-kombat/static/css/main.bced4938.chunk.css.map",
     "static/js/2.021baa46.chunk.js.LICENSE.txt": "/infotech-mortal-kombat/static/js/2.021baa46.chunk.js.LICENSE.txt",
     "static/media/baraka.3091c962.png": "/infotech-mortal-kombat/static/media/baraka.3091c962.png",
     "static/media/baraka.c92e92dd.gif": "/infotech-mortal-kombat/static/media/baraka.c92e92dd.gif",
@@ -63,7 +63,7 @@
   "entrypoints": [
     "static/js/runtime-main.c05ef120.js",
     "static/js/2.021baa46.chunk.js",
-    "static/css/main.1fc9825d.chunk.css",
+    "static/css/main.bced4938.chunk.css",
     "static/js/main.eb1fec70.chunk.js"
   ]
 }
