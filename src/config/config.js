@@ -31,13 +31,19 @@ export const heroNames = {
   subZero: 'Sub Zero',
 }
 
-export const heroCardWidth = 136
-export const startActiveHeroIndex = randomInteger(
-  0,
-  Object.keys(heroNames).length - 1,
-)
+export const startActiveHeroIndex = () => {
+  return randomInteger(0, Object.keys(heroNames).length - 1)
+}
 
 export const buttons = { q: 'q', w: 'w', e: 'e', r: 'r', t: 't', y: 'y' }
+export const buttonsCyrillic = {
+  q: 'й',
+  w: 'ц',
+  e: 'у',
+  r: 'к',
+  t: 'е',
+  y: 'н',
+}
 
 export const arrows = {
   ArrowUp: 'ArrowUp',
@@ -55,8 +61,8 @@ export const icons = {
   faRecycle,
 }
 
+export const heroCardWidth = 136
 export const countKeyDownForShowFinishHim = randomInteger(3, 5)
 export const countKeyDownForShowFatality = randomInteger(6, 8)
 export const countKeyDownForShowSuper = 3
-
 export const fightTimeInSeconds = 10

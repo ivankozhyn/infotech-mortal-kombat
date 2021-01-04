@@ -4,7 +4,12 @@ import Particles from 'react-particles-js'
 import { useHistory } from 'react-router-dom'
 
 import { getMyHeroName, getMyEnemyName } from '../../redux/Selectors'
-import { buttons, icons, fightTimeInSeconds } from '../../config/config'
+import {
+  buttons,
+  buttonsCyrillic,
+  icons,
+  fightTimeInSeconds,
+} from '../../config/config'
 import particlesJsJsonConfig from '../../config/particlesjsConfig.json'
 import { randomIcon, getRandomArena } from '../../utils/utils'
 import { routes } from '../../router/routes'
@@ -40,24 +45,35 @@ export default function VsScreen() {
   const handleKeyDown = useCallback(
     e => {
       const key = e.key.toLowerCase()
-      if (Object.values(buttons).includes(key)) {
+      const isKeyQWERTY = [
+        ...Object.values(buttons),
+        ...Object.values(buttonsCyrillic),
+      ].includes(key)
+
+      if (isKeyQWERTY) {
+        let qwertyButtons
+        if (Object.values(buttons).includes(key)) {
+          qwertyButtons = buttons
+        } else if (Object.values(buttonsCyrillic).includes(key)) {
+          qwertyButtons = buttonsCyrillic
+        }
         switch (key) {
-          case buttons.q:
+          case qwertyButtons.q:
             setIconQ(randomIcon(iconQ, icons))
             break
-          case buttons.w:
+          case qwertyButtons.w:
             setIconW(randomIcon(iconW, icons))
             break
-          case buttons.e:
+          case qwertyButtons.e:
             setIconE(randomIcon(iconE, icons))
             break
-          case buttons.r:
+          case qwertyButtons.r:
             setIconR(randomIcon(iconR, icons))
             break
-          case buttons.t:
+          case qwertyButtons.t:
             setIconT(randomIcon(iconT, icons))
             break
-          case buttons.y:
+          case qwertyButtons.y:
             setIconY(randomIcon(iconY, icons))
             break
           default:

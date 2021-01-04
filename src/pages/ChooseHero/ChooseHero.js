@@ -29,7 +29,7 @@ export default function ChooseHero() {
   const history = useHistory()
   const listEl = useRef(null)
   const [countHeroesInRow, setCountHeroesInRow] = useState(null)
-  const [activeCardIndex, setActiveCardIndex] = useState(startActiveHeroIndex)
+  const [activeCardIndex, setActiveCardIndex] = useState(startActiveHeroIndex())
   const [myHeroName, setMyHeroName] = useState(null)
   const [myEnemyName, setMyEnemyName] = useState(null)
   const [myChosenHeroName, setMyChosenHeroName] = useState(null)
@@ -43,7 +43,7 @@ export default function ChooseHero() {
   }, [])
 
   useEffect(() => {
-    setMyHeroName(() => getActiveHeroName(startActiveHeroIndex, allHeroNames))
+    setMyHeroName(() => getActiveHeroName(startActiveHeroIndex(), allHeroNames))
   }, [allHeroNames])
 
   const countHeroesInColumn = useCallback(() => {

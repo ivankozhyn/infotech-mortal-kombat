@@ -32,13 +32,12 @@ MortalCombat mc_choose_hero: при загрузке страницы, пока�
 - наличие рабочего приложения
 - readme с пояснением, как запустить локально
 
-# To run locally
+# Запустить локально
 
-- Requires Node.js v14 to run.
-- Clone the repository https://github.com/ivankozhyn/infotech-mortal-kombat.
-- Install dependencies with `npm install` or `yarn install` if you're using
-  yarn.
-- Run the development server with `npm start` or `yarn start`.
+- Необходим Node.js v14.
+- Склонировать репозиторий https://github.com/ivankozhyn/infotech-mortal-kombat.
+- Установить зависимости `npm install` или `yarn install`.
+- Запустить проект `npm start` или `yarn start`.
 
 # Реализовано
 
@@ -48,19 +47,19 @@ MortalCombat mc_choose_hero: при загрузке страницы, пока�
   экранов(сетка выбора персонажа меняет структуру на разном размере экрана)
 - при старте битвы показывается надпись 'FIGHT' до момента нажатия на любую
   QWERTY кнопку
-  ![FIGHT](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fight.gif)
+  <img src="https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fight.gif" width="70" />
 - если нажать кнопки QWERTY от 3 до 5 раз(работает рандом) появляется надпись
   'FINISH HIM'
-  ![FINISHHIM](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/finishHim.gif)
+  <img src="https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/finishHim.gif" width="150" />
 - если нажать кнопки QWERTY от 6 до 8 раз(работает рандом) и более появляется
   вопрос 'FATALITY ?'
-  ![Fatality](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fatality.gif)
+  <img src="https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/fatality.gif" width="100" />
 - если иконки QWERTY содержат 3 одинаковые, то появляется надпись 'SUPER'
-  ![Super](https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/superFight.gif)
+  <img src="https://raw.githubusercontent.com/ivankozhyn/infotech-mortal-kombat/master/src/assets/otherAnimations/superFight.gif" width="80" />
 - при загрузке страницы с выбором персонажа, начальный персонаж выбирается
   рандомно
-- QWERTY клавиши работают только в English раскладке, есть поддержка и
-  включенного CAPS LOCK
+- QWERTY клавиши работают в Eng-UA-RU раскладке, есть поддержка и включенного
+  CAPS LOCK
 - бой всегда заканчивается победой дружбы
 
 # Использовано
@@ -72,16 +71,3 @@ MortalCombat mc_choose_hero: при загрузке страницы, пока�
 - использовалась рекурсия для генерации иконок при нажатии QWERTY(чтоб следующая
   иконка точно не была такая как предыдущая, генерация следующей иконки
   рамдомная)
-
-## Available Scripts
-
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-### `npm test`
-
-### `npm run build`
