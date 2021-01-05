@@ -1,6 +1,6 @@
 import { createReducer, combineReducers } from '@reduxjs/toolkit'
 
-import { myHero, myEnemy } from './Actions'
+import { myHero, myEnemy } from './actions'
 
 export const heroesReducer = createReducer(
   {},

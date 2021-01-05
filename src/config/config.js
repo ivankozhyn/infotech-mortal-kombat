@@ -52,6 +52,8 @@ export const arrows = {
   ArrowRight: 'ArrowRight',
 }
 
+export const buttonEnter = 'Enter'
+
 export const icons = {
   faLongArrowAltDown,
   faLongArrowAltLeft,

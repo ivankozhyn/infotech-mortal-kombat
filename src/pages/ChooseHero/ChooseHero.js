@@ -8,6 +8,7 @@ import {
   heroCardWidth,
   startActiveHeroIndex,
   arrows,
+  buttonEnter,
 } from '../../config/config'
 import {
   getAllCoordinates,
@@ -20,7 +21,7 @@ import HeroCard from '../../components/HeroCard/HeroCard'
 import particlesJsJsonConfig from '../../config/particlesjsConfig.json'
 import { routes } from '../../router/routes'
 
-import { myHero, myEnemy } from '../../redux/Actions'
+import { myHero, myEnemy } from '../../redux/actions'
 
 import s from './ChooseHero.module.scss'
 
@@ -61,7 +62,7 @@ export default function ChooseHero() {
       )
       const allCoordinatesValues = Object.values(allCoordinates)
 
-      if (e.key === 'Enter') {
+      if (e.key === buttonEnter) {
         const activeHeroName = getActiveHeroName(activeCardIndex, allHeroNames)
         if (!myChosenHeroName) {
           setMyChosenHeroName(activeHeroName)

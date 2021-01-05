@@ -1,6 +1,11 @@
 import { heroImgs } from '../assets/heroImgs/'
 import { arenas } from '../assets/arenas'
-import { arrows } from '../config/config'
+import {
+  arrows,
+  countKeyDownForShowFinishHim,
+  countKeyDownForShowFatality,
+  countKeyDownForShowSuper,
+} from '../config/config'
 
 const heroBeforeList = Object.keys(heroImgs).length - 1
 const heroAfterList = Object.keys(heroImgs).length - 2
@@ -11,7 +16,7 @@ export const getAllCoordinates = (
   countHeroes,
 ) => {
   if (countHeroesInRow) {
-    const res = {
+    const allCoordinates = {
       [heroBeforeList]: { x: -1, y: 0 },
       [heroAfterList]: { x: countHeroesInRow, y: 0 },
     }
@@ -20,7 +25,7 @@ export const getAllCoordinates = (
 
     for (let i = 0; i < countHeroes; i++) {
       if (i < countHeroesInRow) {
-        res[i] = { x, y }
+        allCoordinates[i] = { x, y }
         x += 1
       }
 
@@ -28,14 +33,14 @@ export const getAllCoordinates = (
         for (let j = 1; j <= countHeroesInColumn(); j++) {
           if (i >= j * countHeroesInRow && i < (j + 1) * countHeroesInRow) {
             y = j
-            res[i] = { x: x - j * countHeroesInRow, y }
+            allCoordinates[i] = { x: x - j * countHeroesInRow, y }
             x++
           }
         }
       }
     }
 
-    return res
+    return allCoordinates
   }
 }
 
@@ -134,48 +139,9 @@ export const randomInteger = (min, max) => {
 }
 
 export const getRandomArena = (classStyle, s) => {
-  if (s) {
-    const key = randomInteger(1, Object.keys(arenas).length)
-    switch (key) {
-      case 1:
-        classStyle.push(s['arena1'])
-        break
-      case 2:
-        classStyle.push(s['arena2'])
-        break
-      case 3:
-        classStyle.push(s['arena3'])
-        break
-      case 4:
-        classStyle.push(s['arena4'])
-        break
-      case 5:
-        classStyle.push(s['arena5'])
-        break
-      case 6:
-        classStyle.push(s['arena6'])
-        break
-      case 7:
-        classStyle.push(s['arena7'])
-        break
-      case 8:
-        classStyle.push(s['arena8'])
-        break
-      case 9:
-        classStyle.push(s['arena9'])
-        break
-      case 10:
-        classStyle.push(s['arena10'])
-        break
-      case 11:
-        classStyle.push(s['arena11'])
-        break
-      default:
-        classStyle.push(s['arena12'])
-        break
-    }
-    return classStyle
-  }
+  const key = randomInteger(1, Object.keys(arenas).length)
+  classStyle.push(s[`arena${key}`])
+  return classStyle
 }
 
 export const randomIcon = (prevIcon, icons) => {
@@ -211,4 +177,15 @@ export const countComboKeyDown = allIcons => {
         return acc
       }, []),
   )
+}
+
+export const showPopups = (countKeyDown, allIcons) => {
+  const isShowFight = countKeyDown < 1
+  const isShowFinishHim =
+    countKeyDown >= countKeyDownForShowFinishHim &&
+    countKeyDown < countKeyDownForShowFatality
+  const isShowFatality = countKeyDown >= countKeyDownForShowFatality
+  const isShowSuper = countComboKeyDown(allIcons) >= countKeyDownForShowSuper
+
+  return [isShowFight, isShowFinishHim, isShowFatality, isShowSuper]
 }

@@ -16,6 +16,7 @@
 }
 
 .buttonWithoutBG {
+  composes: button;
   background-image: none;
 }
 

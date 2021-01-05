@@ -6,6 +6,7 @@ import friendship from '../../assets/otherAnimations/frienship.gif'
 import win from '../../assets/otherAnimations/win.gif'
 import { routes } from '../../router/routes'
 import particlesJsJsonConfig from '../../config/particlesjsConfig.json'
+import { buttonEnter } from '../../config/config'
 
 import s from './FriendshipWin.module.scss'
 
@@ -18,7 +19,7 @@ export default function FriendshipWin() {
 
   const handleKeyDown = useCallback(
     e => {
-      if (e.key === 'Enter') {
+      if (e.key === buttonEnter) {
         historyToRoot()
       }
     },

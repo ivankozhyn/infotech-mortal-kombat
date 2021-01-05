@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux'
 import Particles from 'react-particles-js'
 import { useHistory } from 'react-router-dom'
 
-import { getMyHeroName, getMyEnemyName } from '../../redux/Selectors'
+import { getMyHeroName, getMyEnemyName } from '../../redux/selectors'
 import {
   buttons,
   buttonsCyrillic,
@@ -11,7 +11,7 @@ import {
   fightTimeInSeconds,
 } from '../../config/config'
 import particlesJsJsonConfig from '../../config/particlesjsConfig.json'
-import { randomIcon, getRandomArena } from '../../utils/utils'
+import { randomIcon, getRandomArena, showPopups } from '../../utils/utils'
 import { routes } from '../../router/routes'
 import { useTimer } from '../../hooks/useTimer'
 
@@ -97,6 +97,7 @@ export default function VsScreen() {
   }, [arenaClasses])
 
   const allIcons = [iconQ, iconW, iconE, iconR, iconT, iconY]
+  const showPopupsInFight = showPopups(countKeyDown, allIcons)
 
   return (
     <>
@@ -107,13 +108,17 @@ export default function VsScreen() {
           <Particles className={s.particles} params={particlesJsJsonConfig} />
           <div className={s.seconds}>{seconds}</div>
           <div className={s.buttons}>
-            {Object.values(buttons).map((button, index) => {
+            {Object.values(buttons).map((buttonName, index) => {
               return (
-                <Button key={button} button={button} icon={allIcons[index]} />
+                <Button
+                  key={buttonName}
+                  button={buttonName}
+                  icon={allIcons[index]}
+                />
               )
             })}
           </div>
-          <Popups countKeyDown={countKeyDown} allIcons={allIcons} />
+          <Popups showPopupsInFight={showPopupsInFight} />
           <HeroesFight myHeroName={myHeroName} myEnemyName={myEnemyName} />
         </div>
       )}

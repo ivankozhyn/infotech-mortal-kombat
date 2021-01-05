@@ -1,38 +1,37 @@
-import figth from '../../assets/otherAnimations/fight.gif'
+import fight from '../../assets/otherAnimations/fight.gif'
 import finishHim from '../../assets/otherAnimations/finishHim.gif'
 import fatality from '../../assets/otherAnimations/fatality.gif'
 import superFight from '../../assets/otherAnimations/superFight.gif'
 
-import {
-  countKeyDownForShowFinishHim,
-  countKeyDownForShowFatality,
-  countKeyDownForShowSuper,
-} from '../../config/config'
-import { countComboKeyDown } from '../../utils/utils'
-
 import s from './Popups.module.scss'
 
-export default function Popups({ allIcons, countKeyDown }) {
+export default function Popups({ showPopupsInFight }) {
+  const [
+    isShowFight,
+    isShowFinishHim,
+    isShowFatality,
+    isShowSuper,
+  ] = showPopupsInFight
+
   return (
     <>
-      {countKeyDown < 1 && (
-        <div className={s.figth}>
-          <img src={figth} alt="figth" />
+      {isShowFight && (
+        <div className={s.fight}>
+          <img src={fight} alt="fight" />
         </div>
       )}
-      {countKeyDown >= countKeyDownForShowFinishHim &&
-        countKeyDown < countKeyDownForShowFatality && (
-          <div className={s.finishHim}>
-            <img src={finishHim} alt="finish him" />
-          </div>
-        )}
-      {countKeyDown >= countKeyDownForShowFatality && (
+      {isShowFinishHim && (
+        <div className={s.finishHim}>
+          <img src={finishHim} alt="finish him" />
+        </div>
+      )}
+      {isShowFatality && (
         <div className={s.fatality}>
           <img src={fatality} alt="fatality?" />
           <span className={s.questionMark}>?</span>
         </div>
       )}
-      {countComboKeyDown(allIcons) >= countKeyDownForShowSuper && (
+      {isShowSuper && (
         <div className={s.superFight}>
           {<img src={superFight} alt="super fight" />}
         </div>

@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import s from './Button.module.scss'
 
 export default function Button({ icon }) {
-  const className = [s.button, icon ? s.buttonWithoutBG : ''].join(' ')
+  const className = [icon ? s.buttonWithoutBG : s.button].join(' ')
 
   return (
     <div className={s.container}>
