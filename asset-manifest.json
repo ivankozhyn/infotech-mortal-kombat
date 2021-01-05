@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/infotech-mortal-kombat/static/css/main.bced4938.chunk.css",
-    "main.js": "/infotech-mortal-kombat/static/js/main.eb1fec70.chunk.js",
-    "main.js.map": "/infotech-mortal-kombat/static/js/main.eb1fec70.chunk.js.map",
+    "main.css": "/infotech-mortal-kombat/static/css/main.ecffd316.chunk.css",
+    "main.js": "/infotech-mortal-kombat/static/js/main.ebedb3e5.chunk.js",
+    "main.js.map": "/infotech-mortal-kombat/static/js/main.ebedb3e5.chunk.js.map",
     "runtime-main.js": "/infotech-mortal-kombat/static/js/runtime-main.c05ef120.js",
     "runtime-main.js.map": "/infotech-mortal-kombat/static/js/runtime-main.c05ef120.js.map",
-    "static/js/2.021baa46.chunk.js": "/infotech-mortal-kombat/static/js/2.021baa46.chunk.js",
-    "static/js/2.021baa46.chunk.js.map": "/infotech-mortal-kombat/static/js/2.021baa46.chunk.js.map",
+    "static/js/2.93a2a5bf.chunk.js": "/infotech-mortal-kombat/static/js/2.93a2a5bf.chunk.js",
+    "static/js/2.93a2a5bf.chunk.js.map": "/infotech-mortal-kombat/static/js/2.93a2a5bf.chunk.js.map",
     "index.html": "/infotech-mortal-kombat/index.html",
-    "static/css/main.bced4938.chunk.css.map": "/infotech-mortal-kombat/static/css/main.bced4938.chunk.css.map",
-    "static/js/2.021baa46.chunk.js.LICENSE.txt": "/infotech-mortal-kombat/static/js/2.021baa46.chunk.js.LICENSE.txt",
+    "static/css/main.ecffd316.chunk.css.map": "/infotech-mortal-kombat/static/css/main.ecffd316.chunk.css.map",
+    "static/js/2.93a2a5bf.chunk.js.LICENSE.txt": "/infotech-mortal-kombat/static/js/2.93a2a5bf.chunk.js.LICENSE.txt",
     "static/media/baraka.3091c962.png": "/infotech-mortal-kombat/static/media/baraka.3091c962.png",
     "static/media/baraka.c92e92dd.gif": "/infotech-mortal-kombat/static/media/baraka.c92e92dd.gif",
     "static/media/FriendshipWin.module.scss": "/infotech-mortal-kombat/static/media/bg.31bb92b0.png",
@@ -62,8 +62,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.c05ef120.js",
-    "static/js/2.021baa46.chunk.js",
-    "static/css/main.bced4938.chunk.css",
-    "static/js/main.eb1fec70.chunk.js"
+    "static/js/2.93a2a5bf.chunk.js",
+    "static/css/main.ecffd316.chunk.css",
+    "static/js/main.ebedb3e5.chunk.js"
   ]
 }
