@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, useCallback, useMemo } from 'react'
+import { useRef, useEffect, useCallback, useMemo, useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
 import Particles from 'react-particles-js'
 import { useDispatch } from 'react-redux'
@@ -25,26 +25,74 @@ import { myHero, myEnemy } from '../../redux/actions'
 
 import s from './ChooseHero.module.scss'
 
+const initialChooseHeroState = {
+  myHeroName: null,
+  myEnemyName: null,
+  myChosenHeroName: null,
+  myChosenEnemyName: null,
+  countHeroesInRow: null,
+  activeCardIndex: startActiveHeroIndex(),
+}
+
+const chooseHeroType = {
+  myHeroName: 'myHeroName',
+  myEnemyName: 'myEnemyName',
+  myChosenHeroName: 'myChosenHeroName',
+  myChosenEnemyName: 'myChosenEnemyName',
+  countHeroesInRow: 'countHeroesInRow',
+  activeCardIndex: 'activeCardIndex',
+}
+
+const chooseHeroReducer = (state, { type, payload }) => {
+  switch (type) {
+    case chooseHeroType.myHeroName:
+      return { ...state, myHeroName: payload }
+    case chooseHeroType.myEnemyName:
+      return { ...state, myEnemyName: payload }
+    case chooseHeroType.myChosenHeroName:
+      return { ...state, myChosenHeroName: payload }
+    case chooseHeroType.myChosenEnemyName:
+      return { ...state, myChosenEnemyName: payload }
+    case chooseHeroType.countHeroesInRow:
+      return { ...state, countHeroesInRow: payload }
+    case chooseHeroType.activeCardIndex:
+      return { ...state, activeCardIndex: payload }
+    default:
+      return state
+  }
+}
+
 export default function ChooseHero() {
   const dispatch = useDispatch()
   const history = useHistory()
   const listEl = useRef(null)
-  const [countHeroesInRow, setCountHeroesInRow] = useState(null)
-  const [activeCardIndex, setActiveCardIndex] = useState(startActiveHeroIndex())
-  const [myHeroName, setMyHeroName] = useState(null)
-  const [myEnemyName, setMyEnemyName] = useState(null)
-  const [myChosenHeroName, setMyChosenHeroName] = useState(null)
-  const [, setMyChosenEnemyName] = useState(null)
+  const [chooseHeroState, chooseHeroDispatch] = useReducer(
+    chooseHeroReducer,
+    initialChooseHeroState,
+  )
 
   const allHeroNames = useMemo(() => Object.keys(heroNames), [])
   const countAllHero = allHeroNames.length
+  const {
+    myHeroName,
+    myEnemyName,
+    myChosenHeroName,
+    countHeroesInRow,
+    activeCardIndex,
+  } = chooseHeroState
 
   useEffect(() => {
-    setCountHeroesInRow(Math.floor(listEl.current.offsetWidth / heroCardWidth))
+    chooseHeroDispatch({
+      type: chooseHeroType.countHeroesInRow,
+      payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
+    })
   }, [])
 
   useEffect(() => {
-    setMyHeroName(() => getActiveHeroName(activeCardIndex, allHeroNames))
+    chooseHeroDispatch({
+      type: chooseHeroType.myHeroName,
+      payload: getActiveHeroName(activeCardIndex, allHeroNames),
+    })
   }, [allHeroNames, activeCardIndex])
 
   const countHeroesInColumn = useCallback(() => {
@@ -65,11 +113,20 @@ export default function ChooseHero() {
       if (e.key === buttonEnter) {
         const activeHeroName = getActiveHeroName(activeCardIndex, allHeroNames)
         if (!myChosenHeroName) {
-          setMyChosenHeroName(activeHeroName)
-          setMyEnemyName(activeHeroName)
+          chooseHeroDispatch({
+            type: chooseHeroType.myChosenHeroName,
+            payload: activeHeroName,
+          })
+          chooseHeroDispatch({
+            type: chooseHeroType.myEnemyName,
+            payload: activeHeroName,
+          })
           dispatch(myHero(activeHeroName))
         } else {
-          setMyChosenEnemyName(activeHeroName)
+          chooseHeroDispatch({
+            type: chooseHeroType.myChosenEnemyName,
+            payload: activeHeroName,
+          })
           dispatch(myEnemy(activeHeroName))
           history.push(routes.VSSCREEN)
         }
@@ -84,12 +141,21 @@ export default function ChooseHero() {
         )
 
         const index = Number(getKeyByValue(allCoordinates, { x, y }))
-        setActiveCardIndex(index)
+        chooseHeroDispatch({
+          type: chooseHeroType.activeCardIndex,
+          payload: index,
+        })
 
         if (myChosenHeroName) {
-          setMyEnemyName(() => getActiveHeroName(index, allHeroNames))
+          chooseHeroDispatch({
+            type: chooseHeroType.myEnemyName,
+            payload: getActiveHeroName(index, allHeroNames),
+          })
         } else {
-          setMyHeroName(() => getActiveHeroName(index, allHeroNames))
+          chooseHeroDispatch({
+            type: chooseHeroType.myHeroName,
+            payload: getActiveHeroName(index, allHeroNames),
+          })
         }
       }
     },
@@ -113,7 +179,10 @@ export default function ChooseHero() {
   }, [handleKeyDown])
 
   const handleResize = () => {
-    setCountHeroesInRow(Math.floor(listEl.current.offsetWidth / heroCardWidth))
+    chooseHeroDispatch({
+      type: chooseHeroType.countHeroesInRow,
+      payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
+    })
   }
 
   useEffect(() => {
@@ -124,11 +193,20 @@ export default function ChooseHero() {
   }, [])
 
   const handleHeroCardClick = index => {
-    setActiveCardIndex(index)
+    chooseHeroDispatch({
+      type: chooseHeroType.activeCardIndex,
+      payload: index,
+    })
     if (myChosenHeroName) {
-      setMyEnemyName(() => getActiveHeroName(index, allHeroNames))
+      chooseHeroDispatch({
+        type: chooseHeroType.myEnemyName,
+        payload: getActiveHeroName(index, allHeroNames),
+      })
     } else {
-      setMyHeroName(() => getActiveHeroName(index, allHeroNames))
+      chooseHeroDispatch({
+        type: chooseHeroType.myHeroName,
+        payload: getActiveHeroName(index, allHeroNames),
+      })
     }
   }
 
