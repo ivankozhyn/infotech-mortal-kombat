@@ -1,6 +1,5 @@
 import { useRef, useEffect, useCallback, useMemo, useReducer } from 'react'
 import { useHistory } from 'react-router-dom'
-import Particles from 'react-particles-js'
 import { useDispatch } from 'react-redux'
 
 import {
@@ -18,20 +17,18 @@ import {
 } from '../../utils/utils'
 import { heroAnimations } from '../../assets/heroAnimations'
 import HeroCard from '../../components/HeroCard/HeroCard'
-import particlesJsJsonConfig from '../../config/particlesjsConfig.json'
 import { routes } from '../../router/routes'
-
 import { myHero, myEnemy } from '../../redux/actions'
 
 import s from './ChooseHero.module.scss'
 
 const initialChooseHeroState = {
-  myHeroName: null,
-  myEnemyName: null,
-  myChosenHeroName: null,
-  myChosenEnemyName: null,
+  myHeroName: '',
+  myEnemyName: '',
+  myChosenHeroName: '',
+  myChosenEnemyName: '',
   countHeroesInRow: null,
-  activeCardIndex: startActiveHeroIndex(),
+  activeHeroIndex: null,
 }
 
 const chooseHeroType = {
@@ -40,7 +37,7 @@ const chooseHeroType = {
   myChosenHeroName: 'myChosenHeroName',
   myChosenEnemyName: 'myChosenEnemyName',
   countHeroesInRow: 'countHeroesInRow',
-  activeCardIndex: 'activeCardIndex',
+  activeHeroIndex: 'activeHeroIndex',
 }
 
 const chooseHeroReducer = (state, { type, payload }) => {
@@ -55,8 +52,8 @@ const chooseHeroReducer = (state, { type, payload }) => {
       return { ...state, myChosenEnemyName: payload }
     case chooseHeroType.countHeroesInRow:
       return { ...state, countHeroesInRow: payload }
-    case chooseHeroType.activeCardIndex:
-      return { ...state, activeCardIndex: payload }
+    case chooseHeroType.activeHeroIndex:
+      return { ...state, activeHeroIndex: payload }
     default:
       return state
   }
@@ -78,7 +75,7 @@ export default function ChooseHero() {
     myEnemyName,
     myChosenHeroName,
     countHeroesInRow,
-    activeCardIndex,
+    activeHeroIndex,
   } = chooseHeroState
 
   useEffect(() => {
@@ -86,14 +83,18 @@ export default function ChooseHero() {
       type: chooseHeroType.countHeroesInRow,
       payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
     })
+    chooseHeroDispatch({
+      type: chooseHeroType.activeHeroIndex,
+      payload: startActiveHeroIndex(),
+    })
   }, [])
 
   useEffect(() => {
     chooseHeroDispatch({
       type: chooseHeroType.myHeroName,
-      payload: getActiveHeroName(activeCardIndex, allHeroNames),
+      payload: getActiveHeroName(activeHeroIndex, allHeroNames),
     })
-  }, [allHeroNames, activeCardIndex])
+  }, [allHeroNames, activeHeroIndex])
 
   const countHeroesInColumn = useCallback(() => {
     if (countHeroesInRow) {
@@ -111,7 +112,7 @@ export default function ChooseHero() {
       const allCoordinatesValues = Object.values(allCoordinates)
 
       if (e.key === buttonEnter) {
-        const activeHeroName = getActiveHeroName(activeCardIndex, allHeroNames)
+        const activeHeroName = getActiveHeroName(activeHeroIndex, allHeroNames)
         if (!myChosenHeroName) {
           chooseHeroDispatch({
             type: chooseHeroType.myChosenHeroName,
@@ -133,7 +134,7 @@ export default function ChooseHero() {
       } else if (Object.values(arrows).includes(e.key)) {
         const [x, y] = getNextCoordinates(
           allCoordinates,
-          activeCardIndex,
+          activeHeroIndex,
           countHeroesInRow,
           e.key,
           countHeroesInColumn,
@@ -142,7 +143,7 @@ export default function ChooseHero() {
 
         const index = Number(getKeyByValue(allCoordinates, { x, y }))
         chooseHeroDispatch({
-          type: chooseHeroType.activeCardIndex,
+          type: chooseHeroType.activeHeroIndex,
           payload: index,
         })
 
@@ -160,7 +161,7 @@ export default function ChooseHero() {
       }
     },
     [
-      activeCardIndex,
+      activeHeroIndex,
       countHeroesInRow,
       countHeroesInColumn,
       history,
@@ -194,7 +195,7 @@ export default function ChooseHero() {
 
   const handleHeroCardClick = index => {
     chooseHeroDispatch({
-      type: chooseHeroType.activeCardIndex,
+      type: chooseHeroType.activeHeroIndex,
       payload: index,
     })
     if (myChosenHeroName) {
@@ -213,7 +214,6 @@ export default function ChooseHero() {
   return (
     <>
       <div className={s.container}>
-        <Particles className={s.particles} params={particlesJsJsonConfig} />
         <p className={s.title}>
           {myChosenHeroName ? (
             <span className={s.enemy}>Choose Your Enemy</span>
@@ -228,7 +228,7 @@ export default function ChooseHero() {
                 key={allHeroNames[countAllHero - 1]}
                 hero={allHeroNames[countAllHero - 1]}
                 index={countAllHero - 1}
-                active={countAllHero - 1 === activeCardIndex}
+                active={countAllHero - 1 === activeHeroIndex}
                 handleHeroCardClick={handleHeroCardClick}
               />
               {myHeroName && (
@@ -257,7 +257,7 @@ export default function ChooseHero() {
                     key={hero}
                     hero={hero}
                     index={index}
-                    active={index === activeCardIndex}
+                    active={index === activeHeroIndex}
                     handleHeroCardClick={handleHeroCardClick}
                   />
                 )
@@ -268,7 +268,7 @@ export default function ChooseHero() {
                 key={allHeroNames[countAllHero - 2]}
                 hero={allHeroNames[countAllHero - 2]}
                 index={countAllHero - 2}
-                active={countAllHero - 2 === activeCardIndex}
+                active={countAllHero - 2 === activeHeroIndex}
                 handleHeroCardClick={handleHeroCardClick}
               />
               {myEnemyName && (

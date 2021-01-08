@@ -1,6 +1,5 @@
 import { useEffect, useCallback, useState, useMemo } from 'react'
 import { useSelector } from 'react-redux'
-import Particles from 'react-particles-js'
 import { useHistory } from 'react-router-dom'
 
 import { getMyHeroName, getMyEnemyName } from '../../redux/selectors'
@@ -10,7 +9,6 @@ import {
   icons,
   fightTimeInSeconds,
 } from '../../config/config'
-import particlesJsJsonConfig from '../../config/particlesjsConfig.json'
 import { randomIcon, getRandomArena, showPopups } from '../../utils/utils'
 import { routes } from '../../router/routes'
 import { useTimer } from '../../hooks/useTimer'
@@ -105,7 +103,6 @@ export default function VsScreen() {
         <FriendshipWin />
       ) : (
         <div className={arenaClass}>
-          <Particles className={s.particles} params={particlesJsJsonConfig} />
           <div className={s.seconds}>{seconds}</div>
           <div className={s.buttons}>
             {Object.values(buttons).map((buttonName, index) => {

@@ -1,5 +1,4 @@
 .container {
-  position: relative;
   min-height: 100vh;
   min-width: 100vw;
   background-size: cover;
@@ -52,14 +51,6 @@
 
 .arena12 {
   background-image: url(../../assets/arenas/wushidragongrotto.jpg);
-}
-
-.particles {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
 }
 
 .buttons {
