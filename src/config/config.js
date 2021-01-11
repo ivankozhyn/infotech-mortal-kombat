@@ -64,7 +64,4 @@ export const icons = {
 }
 
 export const heroCardWidth = 136
-export const countKeyDownForShowFinishHim = randomInteger(3, 5)
-export const countKeyDownForShowFatality = randomInteger(6, 8)
-export const countKeyDownForShowSuper = 3
 export const fightTimeInSeconds = 10

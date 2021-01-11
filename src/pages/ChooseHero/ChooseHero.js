@@ -109,7 +109,6 @@ export default function ChooseHero() {
         countHeroesInColumn,
         countAllHero - 2,
       )
-      const allCoordinatesValues = Object.values(allCoordinates)
 
       if (e.key === buttonEnter) {
         const activeHeroName = getActiveHeroName(activeHeroIndex, allHeroNames)
@@ -138,7 +137,6 @@ export default function ChooseHero() {
           countHeroesInRow,
           e.key,
           countHeroesInColumn,
-          allCoordinatesValues,
         )
 
         const index = Number(getKeyByValue(allCoordinates, { x, y }))

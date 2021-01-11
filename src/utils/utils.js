@@ -1,11 +1,6 @@
 import { heroImgs } from '../assets/heroImgs/'
 import { arenas } from '../assets/arenas'
-import {
-  arrows,
-  countKeyDownForShowFinishHim,
-  countKeyDownForShowFatality,
-  countKeyDownForShowSuper,
-} from '../config/config'
+import { arrows } from '../config/config'
 
 const heroBeforeList = Object.keys(heroImgs).length - 1
 const heroAfterList = Object.keys(heroImgs).length - 2
@@ -56,10 +51,11 @@ export const getNextCoordinates = (
   countHeroesInRow,
   key,
   countHeroesInColumn,
-  allCoordinatesValues,
 ) => {
   let x
   let y
+  const allCoordinatesValues = Object.values(allCoordinates)
+
   switch (key) {
     case arrows.ArrowUp:
       x = allCoordinates[activeCardIndex].x
@@ -133,6 +129,18 @@ export const getActiveHeroName = (index, allHeroNames) => {
   return allHeroNames.filter((_, i) => i === index).join('')
 }
 
+export const amountMostRepeatedArrayElement = array => {
+  const res = {}
+  array.forEach(element => {
+    if (res[element]) {
+      res[element] = res[element] + 1
+    } else {
+      res[element] = 1
+    }
+  })
+  return Math.max(...Object.values(res))
+}
+
 export const randomInteger = (min, max) => {
   let rand = min + Math.random() * (max + 1 - min)
   return Math.floor(rand)
@@ -156,18 +164,6 @@ export const randomIcon = (prevIcon, icons) => {
   return nextIcon
 }
 
-export const amountMostRepeatedArrayElement = array => {
-  const res = {}
-  array.forEach(element => {
-    if (res[element]) {
-      res[element] = res[element] + 1
-    } else {
-      res[element] = 1
-    }
-  })
-  return Math.max(...Object.values(res))
-}
-
 export const countComboKeyDown = allIcons => {
   return amountMostRepeatedArrayElement(
     allIcons
@@ -180,6 +176,10 @@ export const countComboKeyDown = allIcons => {
 }
 
 export const showPopups = (countKeyDown, allIcons) => {
+  const countKeyDownForShowFinishHim = randomInteger(3, 5)
+  const countKeyDownForShowFatality = randomInteger(6, 8)
+  const countKeyDownForShowSuper = 3
+
   const isShowFight = countKeyDown < 1
   const isShowFinishHim =
     countKeyDown >= countKeyDownForShowFinishHim &&
