@@ -49,7 +49,7 @@ export const getAllCoordinates = (
 }
 
 export const getKeyByValue =
-  <T extends Object>(object: T, value: { x: number, y: number }) => {
+  <T extends Object>(object: T, value: unknown) => {
     return Object.keys(object).find(key =>
       JSON.stringify(object[key as keyof T]) === JSON.stringify(value))
   }

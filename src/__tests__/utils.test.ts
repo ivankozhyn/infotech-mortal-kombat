@@ -10,6 +10,8 @@ import {
   getRandomArena,
   getNextCoordinates,
 } from '../utils/utils'
+import { IconType } from '../types/types'
+import { Arrows } from '../config/config'
 
 describe('test utils', () => {
   it('function getAllCoordinates', () => {
@@ -39,7 +41,7 @@ describe('test utils', () => {
   })
 
   it('function getKeyByValue', () => {
-    expect(getKeyByValue({ a: 1, b: 2 }, 2)).toBe('b')
+    expect(getKeyByValue({ 2: { x: 1, y: 2 } }, { x: 1, y: 2 })).toBe('2')
   })
 
   it('function getActiveHeroName', () => {
@@ -50,7 +52,7 @@ describe('test utils', () => {
 
   it('function amountMostRepeatedArrayElement', () => {
     expect(
-      amountMostRepeatedArrayElement([34, 7, 23, 5, 3, 2, 7, 7, 7, 7]),
+      amountMostRepeatedArrayElement(['34', '7', '23', '5', '3', '2', '7', '7', '7', '7']),
     ).toBe(5)
   })
 
@@ -83,7 +85,7 @@ describe('test utils', () => {
 
     expect(randomArea).toEqual(
       expect.arrayContaining([
-        stylesObj[getKeyByValue(stylesObj, randomArea[1])],
+        stylesObj[getKeyByValue(stylesObj, randomArea[1]) as keyof typeof stylesObj],
       ]),
     )
 
@@ -95,14 +97,16 @@ describe('test utils', () => {
   it('function randomIcon', () => {
     expect(
       randomIcon(
-        { iconName: 'long-arrow-alt-left' },
         {
-          faLongArrowAltDown: { iconName: 'long-arrow-alt-down' },
-          faLongArrowAltLeft: { iconName: 'long-arrow-alt-left' },
-          faLongArrowAltRight: { iconName: 'long-arrow-alt-right' },
-          faLongArrowAltUp: { iconName: 'long-arrow-alt-up' },
-          faRandom: { iconName: 'random' },
-          faRecycle: { iconName: 'recycle' },
+          iconName: 'long-arrow-alt-left',
+        } as IconType,
+        {
+          faLongArrowAltDown: { iconName: 'long-arrow-alt-down' } as IconType,
+          faLongArrowAltLeft: { iconName: 'long-arrow-alt-left' } as IconType,
+          faLongArrowAltRight: { iconName: 'long-arrow-alt-right' } as IconType,
+          faLongArrowAltUp: { iconName: 'long-arrow-alt-up' } as IconType,
+          faRandom: { iconName: 'random' } as IconType,
+          faRecycle: { iconName: 'recycle' } as IconType,
         },
       ),
     ).toEqual(expect.not.objectContaining({ iconName: 'long-arrow-alt-left' }))
@@ -111,12 +115,12 @@ describe('test utils', () => {
   it('function countComboKeyDown', () => {
     expect(
       countComboKeyDown([
-        { iconName: 'long-arrow-alt-down' },
-        { iconName: 'random' },
-        { iconName: 'random' },
-        { iconName: 'recycle' },
-        { iconName: 'long-arrow-alt-left' },
-        { iconName: 'random' },
+        { iconName: 'long-arrow-alt-down' } as IconType,
+        { iconName: 'random' } as IconType,
+        { iconName: 'random' } as IconType,
+        { iconName: 'recycle' } as IconType,
+        { iconName: 'long-arrow-alt-left' } as IconType,
+        { iconName: 'random' } as IconType,
       ]),
     ).toBe(3)
   })
@@ -148,49 +152,49 @@ describe('test utils', () => {
 
     it('ArrowUp', () => {
       expect(
-        getNextCoordinates(allCoordinates, 10, 7, 'ArrowUp', () => 3),
+        getNextCoordinates(allCoordinates, 10, 7, 'ArrowUp' as keyof Arrows, () => 3),
       ).toStrictEqual([3, 0])
 
       expect(
-        getNextCoordinates(allCoordinates, 20, 7, 'ArrowUp', () => 3),
+        getNextCoordinates(allCoordinates, 20, 7, 'ArrowUp' as keyof Arrows, () => 3),
       ).toStrictEqual([-1, 0])
 
       expect(
-        getNextCoordinates(allCoordinates, 19, 7, 'ArrowUp', () => 3),
+        getNextCoordinates(allCoordinates, 19, 7, 'ArrowUp' as keyof Arrows, () => 3),
       ).toStrictEqual([7, 0])
 
       expect(
-        getNextCoordinates(allCoordinates, 0, 7, 'ArrowUp', () => 3),
+        getNextCoordinates(allCoordinates, 0, 7, 'ArrowUp' as keyof Arrows, () => 3),
       ).toStrictEqual([0, 2])
     })
 
     it('ArrowDown', () => {
       expect(
-        getNextCoordinates(allCoordinates, 10, 7, 'ArrowDown', () => 3),
+        getNextCoordinates(allCoordinates, 10, 7, 'ArrowDown' as keyof Arrows, () => 3),
       ).toStrictEqual([3, 2])
 
       expect(
-        getNextCoordinates(allCoordinates, 14, 7, 'ArrowDown', () => 3),
+        getNextCoordinates(allCoordinates, 14, 7, 'ArrowDown' as keyof Arrows, () => 3),
       ).toStrictEqual([0, 0])
     })
 
     it('ArrowLeft', () => {
       expect(
-        getNextCoordinates(allCoordinates, 10, 7, 'ArrowLeft', () => 3),
+        getNextCoordinates(allCoordinates, 10, 7, 'ArrowLeft' as keyof Arrows, () => 3),
       ).toStrictEqual([2, 1])
 
       expect(
-        getNextCoordinates(allCoordinates, 14, 7, 'ArrowLeft', () => 3),
+        getNextCoordinates(allCoordinates, 14, 7, 'ArrowLeft' as keyof Arrows, () => 3),
       ).toStrictEqual([4, 2])
     })
 
     it('ArrowRight', () => {
       expect(
-        getNextCoordinates(allCoordinates, 10, 7, 'ArrowRight', () => 3),
+        getNextCoordinates(allCoordinates, 10, 7, 'ArrowRight' as keyof Arrows, () => 3),
       ).toStrictEqual([4, 1])
 
       expect(
-        getNextCoordinates(allCoordinates, 18, 7, 'ArrowRight', () => 3),
+        getNextCoordinates(allCoordinates, 18, 7, 'ArrowRight' as keyof Arrows, () => 3),
       ).toStrictEqual([0, 2])
     })
   })
@@ -198,7 +202,7 @@ describe('test utils', () => {
   describe('showPopups', () => {
     it('isShowFight equal false', () => {
       expect(
-        showPopups(1, [{ iconName: 'recycle' }, null, null, null, null, null]),
+        showPopups(1, [{ iconName: 'recycle' } as IconType, null, null, null, null, null]),
       ).toStrictEqual([false, false, false, false])
     })
 
@@ -211,11 +215,11 @@ describe('test utils', () => {
     it('isShowSuper equal false', () => {
       expect(
         showPopups(5, [
-          { iconName: 'long-arrow-alt-right' },
-          { iconName: 'long-arrow-alt-up' },
-          { iconName: 'long-arrow-alt-left' },
-          { iconName: 'recycle' },
-          { iconName: 'recycle' },
+          { iconName: 'long-arrow-alt-right' } as IconType,
+          { iconName: 'long-arrow-alt-up' } as IconType,
+          { iconName: 'long-arrow-alt-left' } as IconType,
+          { iconName: 'recycle' } as IconType,
+          { iconName: 'recycle' } as IconType,
           null,
         ]),
       ).toStrictEqual([false, true, false, false])
@@ -224,12 +228,12 @@ describe('test utils', () => {
     it('isShowSuper equal true', () => {
       expect(
         showPopups(5, [
-          { iconName: 'recycle' },
-          { iconName: 'long-arrow-alt-left' },
-          { iconName: 'recycle' },
+          { iconName: 'recycle' } as IconType,
+          { iconName: 'long-arrow-alt-left' } as IconType,
+          { iconName: 'recycle' } as IconType,
           null,
-          { iconName: 'long-arrow-alt-left' },
-          { iconName: 'recycle' },
+          { iconName: 'long-arrow-alt-left' } as IconType,
+          { iconName: 'recycle' } as IconType,
         ]),
       ).toStrictEqual([false, true, false, true])
     })
