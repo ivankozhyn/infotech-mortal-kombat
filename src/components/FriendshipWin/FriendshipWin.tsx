@@ -4,7 +4,7 @@ import { useFriendshipWin } from '../../hooks/useFriendshipWin'
 
 import s from './FriendshipWin.module.scss'
 
-export default function FriendshipWin() {
+export default function FriendshipWin(): JSX.Element {
   const historyToRoot = useFriendshipWin()
 
   return (

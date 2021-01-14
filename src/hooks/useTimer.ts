@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 
-export const useTimer = seconds => {
+export const useTimer = (seconds: number): number => {
   const [currentSecond, setCurrentSecond] = useState(seconds)
 
   useEffect(() => {

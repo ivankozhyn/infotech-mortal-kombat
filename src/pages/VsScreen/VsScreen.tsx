@@ -1,4 +1,4 @@
-import { buttons, fightTimeInSeconds } from '../../config/config'
+import { Buttons, fightTimeInSeconds } from '../../config/config'
 import { useTimer } from '../../hooks/useTimer'
 import { useVsScreen } from '../../hooks/useVsScreen'
 import Button from '../../components/Button/Button'
@@ -23,23 +23,22 @@ export default function VsScreen() {
       {seconds === 0 ? (
         <FriendshipWin />
       ) : (
-        <div className={arenaClass}>
-          <div className={s.seconds}>{seconds}</div>
-          <div className={s.buttons}>
-            {Object.values(buttons).map((buttonName, index) => {
-              return (
-                <Button
-                  key={buttonName}
-                  button={buttonName}
-                  icon={allIcons[index]}
-                />
-              )
-            })}
+          <div className={arenaClass}>
+            <div className={s.seconds}>{seconds}</div>
+            <div className={s.buttons}>
+              {Object.values(Buttons).map((buttonName, index) => {
+                return (
+                  <Button
+                    key={buttonName}
+                    icon={allIcons[index]}
+                  />
+                )
+              })}
+            </div>
+            <Popups showPopupsInFight={showPopupsInFight} />
+            <HeroesFight myHeroName={myHeroName} myEnemyName={myEnemyName} />
           </div>
-          <Popups showPopupsInFight={showPopupsInFight} />
-          <HeroesFight myHeroName={myHeroName} myEnemyName={myEnemyName} />
-        </div>
-      )}
+        )}
     </>
   )
 }

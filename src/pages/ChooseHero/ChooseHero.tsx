@@ -1,4 +1,4 @@
-import { heroNames } from '../../config/config'
+import { HeroNames } from '../../config/config'
 import { heroAnimations } from '../../assets/heroAnimations'
 import HeroCard from '../../components/HeroCard/HeroCard'
 import { useChooseHero } from '../../hooks/useChooseHero'
@@ -46,12 +46,12 @@ export default function ChooseHero() {
                         ? heroAnimations[myChosenHeroName]
                         : heroAnimations[myHeroName]
                     }
-                    alt={heroNames[myHeroName]}
+                    alt={HeroNames[myHeroName]}
                   />
                   <p className={s.heroName}>
                     {myChosenHeroName
-                      ? heroNames[myChosenHeroName]
-                      : heroNames[myHeroName]}
+                      ? HeroNames[myChosenHeroName]
+                      : HeroNames[myHeroName]}
                   </p>
                 </div>
               )}
@@ -84,7 +84,7 @@ export default function ChooseHero() {
                     src={heroAnimations[myEnemyName]}
                     alt={heroAnimations[myEnemyName]}
                   />
-                  <p className={s.heroName}>{heroNames[myEnemyName]}</p>
+                  <p className={s.heroName}>{HeroNames[myEnemyName]}</p>
                 </div>
               )}
             </div>

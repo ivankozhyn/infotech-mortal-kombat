@@ -3,10 +3,10 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import {
-  heroNames,
+  HeroNames,
   heroCardWidth,
   startActiveHeroIndex,
-  arrows,
+  Arrows,
   buttonEnter,
 } from '../config/config'
 import {
@@ -15,42 +15,52 @@ import {
   getNextCoordinates,
   getActiveHeroName,
 } from '../utils/utils'
+import { HeroNameType, ChooseHeroActions, AllCoordinatesType } from '../types/types'
 
-import { routes } from '../router/routes'
-import { myHero, myEnemy } from '../redux/actions'
+import { Routes } from '../router/routes'
+import { myHeroAction, myEnemyAction } from '../redux/actions'
 
-const initialChooseHeroState = {
+interface ChooseHeroState {
+  myHeroName: HeroNameType | ''
+  myEnemyName: HeroNameType | ''
+  myChosenHeroName: HeroNameType | ''
+  myChosenEnemyName: HeroNameType | ''
+  countHeroesInRow: number,
+  activeHeroIndex: number,
+}
+
+const initialChooseHeroState: ChooseHeroState = {
   myHeroName: '',
   myEnemyName: '',
   myChosenHeroName: '',
   myChosenEnemyName: '',
-  countHeroesInRow: null,
-  activeHeroIndex: null,
+  countHeroesInRow: 0,
+  activeHeroIndex: 0,
 }
 
-const chooseHeroType = {
-  myHeroName: 'myHeroName',
-  myEnemyName: 'myEnemyName',
-  myChosenHeroName: 'myChosenHeroName',
-  myChosenEnemyName: 'myChosenEnemyName',
-  countHeroesInRow: 'countHeroesInRow',
-  activeHeroIndex: 'activeHeroIndex',
+export enum ChooseHeroType {
+  MyHeroName = 'MyHeroName',
+  MyEnemyName = 'MyEnemyName',
+  MyChosenHeroName = 'MyChosenHeroName',
+  MyChosenEnemyName = 'MyChosenEnemyName',
+  CountHeroesInRow = 'CountHeroesInRow',
+  ActiveHeroIndex = 'ActiveHeroIndex',
 }
 
-const chooseHeroReducer = (state, { type, payload }) => {
-  switch (type) {
-    case chooseHeroType.myHeroName:
-      return { ...state, myHeroName: payload }
-    case chooseHeroType.myEnemyName:
-      return { ...state, myEnemyName: payload }
-    case chooseHeroType.myChosenHeroName:
-      return { ...state, myChosenHeroName: payload }
-    case chooseHeroType.myChosenEnemyName:
-      return { ...state, myChosenEnemyName: payload }
-    case chooseHeroType.countHeroesInRow:
-      return { ...state, countHeroesInRow: payload }
-    case chooseHeroType.activeHeroIndex:
-      return { ...state, activeHeroIndex: payload }
+const chooseHeroReducer = (state: ChooseHeroState, action: ChooseHeroActions) => {
+  switch (action.type) {
+    case ChooseHeroType.MyHeroName:
+      return { ...state, myHeroName: action.payload }
+    case ChooseHeroType.MyEnemyName:
+      return { ...state, MyEnemyName: action.payload }
+    case ChooseHeroType.MyChosenHeroName:
+      return { ...state, myChosenHeroName: action.payload }
+    case ChooseHeroType.MyChosenEnemyName:
+      return { ...state, myChosenEnemyName: action.payload }
+    case ChooseHeroType.CountHeroesInRow:
+      return { ...state, countHeroesInRow: action.payload }
+    case ChooseHeroType.ActiveHeroIndex:
+      return { ...state, activeHeroIndex: action.payload }
     default:
       return state
   }
@@ -59,13 +69,13 @@ const chooseHeroReducer = (state, { type, payload }) => {
 export const useChooseHero = () => {
   const dispatch = useDispatch()
   const history = useHistory()
-  const listEl = useRef(null)
+  const listEl = useRef<HTMLUListElement>(null)
   const [chooseHeroState, chooseHeroDispatch] = useReducer(
     chooseHeroReducer,
     initialChooseHeroState,
   )
 
-  const allHeroNames = useMemo(() => Object.keys(heroNames), [])
+  const allHeroNames: HeroNameType[] = useMemo(() => Object.keys(HeroNames), []) as HeroNameType[]
   const countAllHero = allHeroNames.length
   const {
     myHeroName,
@@ -76,32 +86,35 @@ export const useChooseHero = () => {
   } = chooseHeroState
 
   useEffect(() => {
+    if (listEl.current) {
+      chooseHeroDispatch({
+        type: ChooseHeroType.CountHeroesInRow,
+        payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
+      })
+    }
     chooseHeroDispatch({
-      type: chooseHeroType.countHeroesInRow,
-      payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
-    })
-    chooseHeroDispatch({
-      type: chooseHeroType.activeHeroIndex,
+      type: ChooseHeroType.ActiveHeroIndex,
       payload: startActiveHeroIndex(),
     })
   }, [])
 
   useEffect(() => {
     chooseHeroDispatch({
-      type: chooseHeroType.myHeroName,
+      type: ChooseHeroType.MyHeroName,
       payload: getActiveHeroName(activeHeroIndex, allHeroNames),
     })
   }, [allHeroNames, activeHeroIndex])
 
-  const countHeroesInColumn = useCallback(() => {
+  const countHeroesInColumn: () => number = useCallback(() => {
     if (countHeroesInRow) {
       return Math.ceil((countAllHero - 2) / countHeroesInRow)
     }
+    return 0
   }, [countAllHero, countHeroesInRow])
 
   const handleKeyDown = useCallback(
     e => {
-      const allCoordinates = getAllCoordinates(
+      const allCoordinates: AllCoordinatesType = getAllCoordinates(
         countHeroesInRow,
         countHeroesInColumn,
         countAllHero - 2,
@@ -111,23 +124,23 @@ export const useChooseHero = () => {
         const activeHeroName = getActiveHeroName(activeHeroIndex, allHeroNames)
         if (!myChosenHeroName) {
           chooseHeroDispatch({
-            type: chooseHeroType.myChosenHeroName,
+            type: ChooseHeroType.MyChosenHeroName,
             payload: activeHeroName,
           })
           chooseHeroDispatch({
-            type: chooseHeroType.myEnemyName,
+            type: ChooseHeroType.MyEnemyName,
             payload: activeHeroName,
           })
-          dispatch(myHero(activeHeroName))
+          dispatch(myHeroAction(activeHeroName))
         } else {
           chooseHeroDispatch({
-            type: chooseHeroType.myChosenEnemyName,
+            type: ChooseHeroType.MyChosenEnemyName,
             payload: activeHeroName,
           })
-          dispatch(myEnemy(activeHeroName))
-          history.push(routes.VSSCREEN)
+          dispatch(myEnemyAction(activeHeroName))
+          history.push(Routes.VSSCREEN)
         }
-      } else if (Object.values(arrows).includes(e.key)) {
+      } else if (Object.values(Arrows).includes(e.key)) {
         const [x, y] = getNextCoordinates(
           allCoordinates,
           activeHeroIndex,
@@ -137,19 +150,20 @@ export const useChooseHero = () => {
         )
 
         const index = Number(getKeyByValue(allCoordinates, { x, y }))
+
         chooseHeroDispatch({
-          type: chooseHeroType.activeHeroIndex,
+          type: ChooseHeroType.ActiveHeroIndex,
           payload: index,
         })
 
         if (myChosenHeroName) {
           chooseHeroDispatch({
-            type: chooseHeroType.myEnemyName,
+            type: ChooseHeroType.MyEnemyName,
             payload: getActiveHeroName(index, allHeroNames),
           })
         } else {
           chooseHeroDispatch({
-            type: chooseHeroType.myHeroName,
+            type: ChooseHeroType.MyHeroName,
             payload: getActiveHeroName(index, allHeroNames),
           })
         }
@@ -175,10 +189,12 @@ export const useChooseHero = () => {
   }, [handleKeyDown])
 
   const handleResize = () => {
-    chooseHeroDispatch({
-      type: chooseHeroType.countHeroesInRow,
-      payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
-    })
+    if (listEl.current) {
+      chooseHeroDispatch({
+        type: ChooseHeroType.CountHeroesInRow,
+        payload: Math.floor(listEl.current.offsetWidth / heroCardWidth),
+      })
+    }
   }
 
   useEffect(() => {
@@ -188,19 +204,19 @@ export const useChooseHero = () => {
     }
   }, [])
 
-  const handleHeroCardClick = index => {
+  const handleHeroCardClick = (index: number): void => {
     chooseHeroDispatch({
-      type: chooseHeroType.activeHeroIndex,
+      type: ChooseHeroType.ActiveHeroIndex,
       payload: index,
     })
     if (myChosenHeroName) {
       chooseHeroDispatch({
-        type: chooseHeroType.myEnemyName,
+        type: ChooseHeroType.MyEnemyName,
         payload: getActiveHeroName(index, allHeroNames),
       })
     } else {
       chooseHeroDispatch({
-        type: chooseHeroType.myHeroName,
+        type: ChooseHeroType.MyHeroName,
         payload: getActiveHeroName(index, allHeroNames),
       })
     }

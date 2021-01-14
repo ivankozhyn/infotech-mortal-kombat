@@ -5,7 +5,11 @@ import superFight from '../../assets/otherAnimations/superFight.gif'
 
 import s from './Popups.module.scss'
 
-export default function Popups({ showPopupsInFight }) {
+interface Props {
+  showPopupsInFight: Boolean[]
+}
+
+export default function Popups({ showPopupsInFight }: Props): JSX.Element {
   const [
     isShowFight,
     isShowFinishHim,
@@ -18,6 +22,7 @@ export default function Popups({ showPopupsInFight }) {
       {isShowFight && (
         <div className={s.fight}>
           <img src={fight} alt="fight" />
+          <div className={s.pressButton}>press the buttons QWERTY</div>
         </div>
       )}
       {isShowFinishHim && (

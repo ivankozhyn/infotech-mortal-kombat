@@ -1,8 +1,14 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
+import { IconType } from '../../types/types'
+
 import s from './Button.module.scss'
 
-export default function Button({ icon }) {
+interface Props {
+  icon: IconType
+}
+
+export default function Button({ icon }: Props): JSX.Element {
   const className = [icon ? s.buttonWithoutBG : s.button].join(' ')
 
   return (
