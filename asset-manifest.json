@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/infotech-mortal-kombat/static/css/main.f9aa4878.chunk.css",
-    "main.js": "/infotech-mortal-kombat/static/js/main.0ff7056e.chunk.js",
-    "main.js.map": "/infotech-mortal-kombat/static/js/main.0ff7056e.chunk.js.map",
+    "main.js": "/infotech-mortal-kombat/static/js/main.30b8db6d.chunk.js",
+    "main.js.map": "/infotech-mortal-kombat/static/js/main.30b8db6d.chunk.js.map",
     "runtime-main.js": "/infotech-mortal-kombat/static/js/runtime-main.c05ef120.js",
     "runtime-main.js.map": "/infotech-mortal-kombat/static/js/runtime-main.c05ef120.js.map",
     "static/js/2.09f584e8.chunk.js": "/infotech-mortal-kombat/static/js/2.09f584e8.chunk.js",
@@ -64,6 +64,6 @@
     "static/js/runtime-main.c05ef120.js",
     "static/js/2.09f584e8.chunk.js",
     "static/css/main.f9aa4878.chunk.css",
-    "static/js/main.0ff7056e.chunk.js"
+    "static/js/main.30b8db6d.chunk.js"
   ]
 }
