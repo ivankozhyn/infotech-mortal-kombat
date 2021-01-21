@@ -22,7 +22,7 @@ export default function Popups({ showPopupsInFight }: Props): JSX.Element {
       {isShowFight && (
         <div className={s.fight}>
           <img src={fight} alt="fight" />
-          <div className={s.pressButton}>press the buttons QWERTY</div>
+          <div className={s.pressButton}>press the QWERTY buttons</div>
         </div>
       )}
       {isShowFinishHim && (

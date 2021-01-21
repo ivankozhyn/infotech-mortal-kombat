@@ -52,7 +52,7 @@ const chooseHeroReducer = (state: ChooseHeroState, action: ChooseHeroActions) =>
     case ChooseHeroType.MyHeroName:
       return { ...state, myHeroName: action.payload }
     case ChooseHeroType.MyEnemyName:
-      return { ...state, MyEnemyName: action.payload }
+      return { ...state, myEnemyName: action.payload }
     case ChooseHeroType.MyChosenHeroName:
       return { ...state, myChosenHeroName: action.payload }
     case ChooseHeroType.MyChosenEnemyName:
